@@ -11,6 +11,7 @@ fepois(
   subset = NULL,
   robust = TRUE,
   cluster = NULL,
+  pseudo_rsq = FALSE,
   tol = 1e-10
 )
 }
@@ -36,6 +37,9 @@ used in the fitting process.}
 \item{cluster}{optional variable to group by and compute sandwich-type
 robust standard errors. Should be a formula of the form \code{~x_j} or
 an object that be coerced to a formula.}
+
+\item{pseudo_rsq}{logical value to return a a pseudo-R2 based on Kendall's
+correlation.}
 
 \item{tol}{tolerance value for GLM convergence criteria.}
 }

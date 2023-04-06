@@ -10,6 +10,8 @@
 #' @param cluster optional variable to group by and compute sandwich-type
 #' robust standard errors. Should be a formula of the form `~x_j` or
 #' an object that be coerced to a formula.
+#' @param pseudo_rsq logical value to return a a pseudo-R2 based on Kendall's
+#' correlation.
 #' @param tol tolerance value for GLM convergence criteria.
 #' @importFrom Formula Formula
 #' @importFrom Matrix Diagonal
@@ -21,6 +23,7 @@ fepois <- function(formula, data,
                          subset = NULL,
                          robust = TRUE,
                          cluster = NULL,
+                         pseudo_rsq = FALSE,
                          tol = 1e-10) {
   if (!is.null(subset)) { data <- data[subset, ] }
   
@@ -40,6 +43,10 @@ fepois <- function(formula, data,
   
   vardep <- all.vars(formula(formula, lhs = 1, rhs = 0))
   vardep <- data[, vardep, drop = TRUE]
+  
+  if (isTRUE(pseudo_rsq)) {
+    vardep2 <- vardep
+  }
   
   if (min(vardep) < 0) {
     stop("y should be greater or equals to zero.")
@@ -180,6 +187,10 @@ fepois <- function(formula, data,
   }
   
   names(reg$fitted.values) <- rownames(data)
+  
+  if (isTRUE(pseudo_rsq)) {
+    reg$pseudo_rsq <- cor(vardep2, reg$fitted.values, method = "kendall")^2
+  }
   
   class(reg) <- "fepois"
   return(reg)
