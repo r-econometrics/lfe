@@ -102,7 +102,6 @@ fepois <- function(formula, data,
       fe_tmp <- paste0(fe, collapse = " + ")
       formula_tmp <- as.formula(paste0(
         i, " ~ -1 ",
-        ifelse(!is.null(offset2), " + offset ", ""),
         "| ", fe_tmp
       ))
       fit.tmp <- felm(formula = formula_tmp, data = data, weights = mu)
