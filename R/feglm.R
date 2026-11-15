@@ -113,10 +113,11 @@ fepois <- function(formula, data,
     
     n <- reg$N
     k <- length(varind)
+    mu <- mu * max_vardep
     W1 <- Diagonal(mu, n = n)
     bread <- solve(t(z) %*% W1 %*% z)
     
-    res <- vardep - mu
+    res <- vardep * max_vardep - mu
     
     if (robust) {
       if (is.null(cluster)) {
