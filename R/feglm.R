@@ -147,18 +147,18 @@ fepois <- function(formula, data,
     reg$vcv <- vcov
     reg$se <- sqrt(diag(reg$vcv))
     reg$tval <- reg$coefficients / reg$se
-    reg$pval <- 1 - pnorm(abs(reg$tval))
+    reg$pval <- 2 * pnorm(-abs(reg$tval))
     
     if (robust) {
       reg$vcv <- vcov
       reg$se <- sqrt(diag(reg$vcv))
       reg$tval <- reg$coefficients / reg$se
-      reg$pval <- 1 - pnorm(abs(reg$tval))
+      reg$pval <- 2 * pnorm(-abs(reg$tval))
       
       reg$robustvcv <- vcov
       reg$rse <- sqrt(diag(reg$robustvcv))
       reg$rtval <- reg$coefficients / reg$rse
-      reg$rpval <- 1 - pnorm(abs(reg$rtval))
+      reg$rpval <- 2 * pnorm(-abs(reg$rtval))
     }
   }
   
