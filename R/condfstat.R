@@ -205,7 +205,7 @@ condfstat <- function(object, type = "default", quantiles = 0.0, bN = 100L) {
   if (length(st1$lhs) == 1) {
     # only a single endogenous variable
     # reduce to ordinary F-test
-    df1 <- nrow(st1$coefficients)
+    df1 <- length(st1$instruments)
     result <- as.matrix(sapply(types, function(typ) {
       waldtest(st1, st1$instruments, df1 = df1, type = typ)["F"]
     }))

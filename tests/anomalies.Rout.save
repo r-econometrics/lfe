@@ -487,9 +487,9 @@ attr(,"df1")
 > est0 <- felm( y ~ 1|0|(Q~z1))
 > condfstat(est0)
           Q
-iid F 0.148
+iid F 0.296
 attr(,"df1")
-[1] 2
+[1] 1
 > 
 > # inplace test and NA
 > foo <- as.numeric(1:6)
