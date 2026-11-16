@@ -165,24 +165,8 @@ SEXP MY_dsyrk(SEXP inbeta, SEXP inC, SEXP inalpha, SEXP inA) {
 // debugging memory copy
 SEXP MY_address(SEXP x) {
   char chr[30];
-  snprintf(chr, sizeof(chr), "adr=%p, named=%d", (void *)x, NAMED(x));
+  snprintf(chr, sizeof(chr), "adr=%p", (void *)x);
   return (mkString(chr));
-}
-
-SEXP MY_named(SEXP x, SEXP n) {
-  if (isNull(n)) {
-    // return NAMED status
-    SEXP res = allocVector(INTSXP, 1);
-    PROTECT(res);
-    INTEGER(res)
-    [0] = NAMED(x);
-    setAttrib(res, install("x"), x);
-    UNPROTECT(1);
-    return (res);
-  }
-  // set named status. Use this at your own peril. Seriously. Things may ...
-  SET_NAMED(x, INTEGER(n)[0]);
-  return (x);
 }
 
 /* Trickery to check for interrupts when using threads */

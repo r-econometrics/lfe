@@ -20,7 +20,6 @@ static R_CallMethodDef callMethods[] = {
     {"piproduct", (DL_FUNC)&MY_piproduct, 2},
     {"dsyrk", (DL_FUNC)&MY_dsyrk, 4},
     {"address", (DL_FUNC)&MY_address, 1},
-    //  {"named", (DL_FUNC) &MY_named, 2},
     {"inplace", (DL_FUNC)&inplace, 1},
     {"rowsum", (DL_FUNC)&crowsum, 3},
     //  {"ppf", (DL_FUNC) &MY_ppf, 2},
